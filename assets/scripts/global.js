@@ -1,2 +1,13 @@
-// Script global du thème enfant
-console.log("nathalie_theme global.js chargé");
+// Ouvre la modal contact au clic sur le lien du menu
+const contactLinks = document.querySelectorAll(
+  'a[href="#contact-modal"], a[href="#"]'
+);
+contactLinks.forEach((link) => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    const modal = document.querySelector(".modal-contact");
+    if (modal) {
+      modal.style.display = "block";
+    }
+  });
+});

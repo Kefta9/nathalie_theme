@@ -1,6 +1,26 @@
-/* Styles additionnels du thème enfant */
-body {
-    font-family: 'Montserrat', Arial, sans-serif;
-    background: #fafafa;
-    color: #222;
+/* ------------------------------------------------------ Général ------------------------------------------------------ */
+* {
+    font-family: 'Space Mono', monospace;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
+:root {
+    --main-color: rgba(255, 255, 255, 1);
+    --CTA-color: rgba(216, 216, 216, 1);
+    --black-color: rgba(0, 0, 0, 1);
+    --red-color: rgba(224, 0, 0, 1);
+}
+
+a, ul, li {
+    color: inherit; /* Hérite de la couleur du parent */
+    text-decoration: none;
+    list-style: none;
+    
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
