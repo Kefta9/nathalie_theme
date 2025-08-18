@@ -13,6 +13,7 @@
         <p class="footer-copyright">Tous droits réservés</p>
     </nav>
 </footer>
+<?php get_template_part('templates-part/modal_contact'); ?>
 <?php wp_footer(); ?>
 </body>
 </html>
