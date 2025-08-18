@@ -1,0 +1,39 @@
+/* Styles du footer Nathalie Mota */
+
+.site-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 2em;
+}
+
+.footer-menu {
+    display: flex;
+    gap: 2em;
+}
+
+@media (max-width: 575px) {
+    .site-footer {
+        flex-direction: column;
+    }
+    .footer-nav {
+        flex-direction: column;
+        gap: 0;
+    }
+    .footer-menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+    }
+    .footer-copyright {
+        margin-top: 1em;
+    }
+}
+
