@@ -16,8 +16,7 @@
 a, ul, li {
     color: inherit; /* Hérite de la couleur du parent */
     text-decoration: none;
-    list-style: none;
-    
+    list-style: none;    
 }
 
 html {
