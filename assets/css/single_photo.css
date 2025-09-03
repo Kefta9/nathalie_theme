@@ -1,1 +1,18 @@
 /* Style du template single-photo */
+.nav-link {
+  position: relative;
+}
+
+.nav-preview {
+  display: block;
+  width: 60px;
+  height: auto;
+  margin-left: 5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: 0.2s ease; /* effet smooth */
+}
+
+
+
+
