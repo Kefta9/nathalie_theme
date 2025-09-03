@@ -42,6 +42,14 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
         <?php the_post_thumbnail('large', ['class' => 'single-photo__img', 'loading' => 'lazy']); ?>
       </div>
     </div>
+
+    <div class="single-photo__cta">
+      <p>Cette photo vous intéresse ?</p>
+      <a href="#modal-contact" class="btn-contact" data-ref="<?= esc_attr($ref); ?>">
+        Contact
+      </a>
+    </div>
+
   </section>
 
   <!-- SECTION 2 : Autres photos -->

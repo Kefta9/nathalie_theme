@@ -3,12 +3,26 @@ const contactLinks = document.querySelectorAll('a[href="#modal-contact"]');
 const modal = document.getElementById("modal-contact");
 const overlay = modal;
 
+// Fonction pour remplir le champ "Réf. photo" dans CF7
+function fillReferenceField(ref) {
+  const refInput = document.querySelector('input[name="your-subject"]');
+  if (refInput) {
+    refInput.value = ref;
+  }
+}
+
 contactLinks.forEach((link) => {
   link.addEventListener("click", function (e) {
     e.preventDefault();
     if (modal) {
       modal.setAttribute("aria-hidden", "false");
       modal.style.display = "flex";
+
+      // Récupère la réf depuis l'attribut data-ref
+      const ref = link.getAttribute("data-ref");
+      if (ref) {
+        fillReferenceField(ref);
+      }
     }
   });
 });
