@@ -1,12 +1,18 @@
 /* Styles spécifiques au header */
+.site-header {
+    width: 100%;
+    background: var(--main-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
 .navbar-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1440px;
+    max-width: 1280px;
     margin: 0 auto;
     height: 80px;
-    padding: 20px;
+    padding: 0 40px;
 }
 
 .logo img {
