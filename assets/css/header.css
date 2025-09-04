@@ -88,6 +88,9 @@
     opacity: 0;
     z-index: 100;
   }
+  .navbar-container {
+    padding: 0 20px;
+  }
   .nav-menu.open {
     display: block;
     animation: fadeInMenu 0.4s ease;

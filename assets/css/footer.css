@@ -6,7 +6,7 @@
   padding: 20px;
   font-size: 16px;
   text-transform: uppercase;
-  height: 62px;
+  height: auto;
   border-top: 1px solid var(--black-color);
 }
 
