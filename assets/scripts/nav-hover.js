@@ -1,17 +1,18 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const preview = document.querySelector('.nav-preview-single');
+// Fonctionnement du hover dans la nav
+document.addEventListener("DOMContentLoaded", () => {
+  const preview = document.querySelector(".nav-preview-single");
   if (!preview) return;
 
-  const defaultSrc = preview.getAttribute('data-default') || preview.src;
+  const defaultSrc = preview.getAttribute("data-default") || preview.src;
 
-  document.querySelectorAll('.nav-link').forEach(link => {
-    const hoverSrc = link.getAttribute('data-thumbnail-hover');
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    const hoverSrc = link.getAttribute("data-thumbnail-hover");
 
-    link.addEventListener('mouseenter', () => {
+    link.addEventListener("mouseenter", () => {
       if (hoverSrc) preview.src = hoverSrc;
     });
 
-    link.addEventListener('mouseleave', () => {
+    link.addEventListener("mouseleave", () => {
       preview.src = defaultSrc;
     });
   });

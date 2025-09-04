@@ -1,38 +1,39 @@
-/* Styles du footer Nathalie Mota */
+/* Styles du footer */
 .site-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    font-size: 16px;
-    text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-size: 16px;
+  text-transform: uppercase;
+  height: 62px;
+  border-top: 1px solid var(--black-color);
 }
 
 .footer-nav {
-    display: flex;
-    gap: 2em;
+  display: flex;
+  gap: 2em;
 }
 
 .footer-menu {
-    display: flex;
-    gap: 2em;
+  display: flex;
+  gap: 2em;
 }
 
 @media (max-width: 575px) {
-    .site-footer {
-        flex-direction: column;
-    }
-    .footer-nav {
-        flex-direction: column;
-        gap: 0;
-    }
-    .footer-menu {
-        flex-direction: column;
-        align-items: center;
-        gap: 1em;
-    }
-    .footer-copyright {
-        margin-top: 1em;
-    }
+  .site-footer {
+    flex-direction: column;
+  }
+  .footer-nav {
+    flex-direction: column;
+    gap: 0;
+  }
+  .footer-menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
+  .footer-copyright {
+    margin-top: 1em;
+  }
 }
-

@@ -45,7 +45,7 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
       </div>
 
       <?php
-      // ---------- NAVIGATION PAR CATÉGORIE UNIQUEMENT ----------
+      // ---------- NAVIGATION PAR CATÉGORIE ----------
       $main_thumb = get_the_post_thumbnail_url($current_post_id, 'thumbnail');
 
       // IDs de catégories de la photo courante

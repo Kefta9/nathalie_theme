@@ -1,71 +1,77 @@
 /* Styles de la modale de contact */
 .modal-contact-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.6);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: opacity 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.3s;
 }
 
 .modal-contact-content {
-    background: var(--main-color);
-    border: 5px solid var(--black-color);
-    width: 597px;
-    height: 769px;
-    position: relative;
-    animation: modalFadeIn 0.3s;
-    overflow: hidden;
+  background: var(--main-color);
+  border: 5px solid var(--black-color);
+  width: 597px;
+  height: 769px;
+  position: relative;
+  animation: modalFadeIn 0.3s;
+  overflow: hidden;
 }
 
 @keyframes modalFadeIn {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .modal-contact-header-img {
-    width: 100%;
-    display: block;
-    object-fit: cover;
-    padding-top: 18px;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  padding-top: 18px;
 }
 
 .modal-contact-body {
-    padding: 50px;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
 .modal-contact-body label {
-    text-transform: uppercase;
-    font-size: 12px;
+  text-transform: uppercase;
+  font-size: 12px;
 }
 
 .modal-contact-body input,
 .modal-contact-body textarea {
-    width: 263px;
-    height: 40px;
-    margin-bottom: 1.2rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    display: block;
-    padding-left: 10px;
+  width: 263px;
+  height: 40px;
+  margin-bottom: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  display: block;
+  padding-left: 10px;
 }
 
 .modal-contact-body input[type="submit"] {
-    height: 50px;
+  height: 50px;
 }
 
 .modal-contact-body textarea {
-    height: 210px;
+  height: 210px;
 }
 
 .wpcf7-spinner {
