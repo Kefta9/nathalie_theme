@@ -78,6 +78,7 @@
 
 @media (max-width: 768px) {
   .nav-menu {
+    display: none;
     position: fixed;
     top: 80px;
     left: 0;
