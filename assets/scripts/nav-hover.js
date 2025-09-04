@@ -1,13 +1,18 @@
-document.querySelectorAll('.nav-link').forEach(link => {
-  const mainImg = document.querySelector('.nav-preview-single');
-  const defaultSrc = link.getAttribute('data-thumbnail-default');
-  const hoverSrc = link.getAttribute('data-thumbnail-hover');
+document.addEventListener('DOMContentLoaded', () => {
+  const preview = document.querySelector('.nav-preview-single');
+  if (!preview) return;
 
-  link.addEventListener('mouseenter', () => {
-    if (hoverSrc) mainImg.src = hoverSrc;
-  });
+  const defaultSrc = preview.getAttribute('data-default') || preview.src;
 
-  link.addEventListener('mouseleave', () => {
-    if (defaultSrc) mainImg.src = defaultSrc;
+  document.querySelectorAll('.nav-link').forEach(link => {
+    const hoverSrc = link.getAttribute('data-thumbnail-hover');
+
+    link.addEventListener('mouseenter', () => {
+      if (hoverSrc) preview.src = hoverSrc;
+    });
+
+    link.addEventListener('mouseleave', () => {
+      preview.src = defaultSrc;
+    });
   });
 });

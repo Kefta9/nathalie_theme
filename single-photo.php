@@ -45,96 +45,76 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
       </div>
 
       <?php
-      // Récupère toutes les photos
-      $all_photos = get_posts([
-          'post_type' => 'photo',
-          'posts_per_page' => -1,
-          'orderby' => 'date',
-          'order' => 'ASC'
-      ]);
-
-      // Index de la photo courante
-      $current_index = array_search($current_post_id, array_column($all_photos, 'ID'));
-
-      // Photo précédente et suivante
-      $prev_post = ($current_index > 0) ? $all_photos[$current_index - 1] : end($all_photos);
-      $next_post = ($current_index < count($all_photos) - 1) ? $all_photos[$current_index + 1] : reset($all_photos);
-
+      // ---------- NAVIGATION PAR CATÉGORIE UNIQUEMENT ----------
       $main_thumb = get_the_post_thumbnail_url($current_post_id, 'thumbnail');
 
-      // Catégories courantes
-      $current_cat_ids = $cats && !is_wp_error($cats) ? wp_list_pluck($cats, 'term_id') : [];
-      ?>        
+      // IDs de catégories de la photo courante
+      $current_cat_ids = ($cats && !is_wp_error($cats)) ? wp_list_pluck($cats, 'term_id') : [];
 
-      <!-- Navigation flèches -->
+      // Récupère toutes les photos de la/les même(s) catégorie(s), triées
+      $category_posts = [];
+      if ( !empty($current_cat_ids) ) {
+        $category_posts = get_posts([
+          'post_type'      => 'photo',
+          'posts_per_page' => -1,
+          'orderby'        => 'date',
+          'order'          => 'ASC',
+          'tax_query'      => [[
+            'taxonomy' => 'categorie',
+            'field'    => 'term_id',
+            'terms'    => $current_cat_ids,
+          ]],
+          'fields'         => 'ids', // perf : on ne récupère que les IDs
+        ]);
+      }
+
+      // S'assurer que la photo courante est bien présente (sécurité si multiples taxos)
+      if (!in_array($current_post_id, $category_posts, true)) {
+        $category_posts[] = $current_post_id;
+      }
+
+      // Trouver l’index de la photo courante dans ce tableau catégorie
+      $current_index = array_search($current_post_id, $category_posts, true);
+
+      // Calculer prev/next dans CETTE liste (navigation circulaire)
+      $count = count($category_posts);
+      $show_arrows = ($count > 1);
+
+      if ($show_arrows) {
+        $prev_index = ($current_index > 0) ? $current_index - 1 : $count - 1;
+        $next_index = ($current_index < $count - 1) ? $current_index + 1 : 0;
+
+        $prev_id = $category_posts[$prev_index];
+        $next_id = $category_posts[$next_index];
+
+        $prev_thumb = get_the_post_thumbnail_url($prev_id, 'thumbnail');
+        $next_thumb = get_the_post_thumbnail_url($next_id, 'thumbnail');
+      }
+      ?>
+
+      <!-- Navigation flèches (catégorie only) -->
+      <?php if ($show_arrows): ?>
       <div class="single-photo__nav">
         <!-- Miniature -->
-        <img src="<?php echo esc_url($main_thumb); ?>" class="nav-preview-single" />
+        <img src="<?php echo esc_url($main_thumb); ?>" class="nav-preview-single" data-default="<?php echo esc_url($main_thumb); ?>" alt="" />
+        
         <div class="nav-arrows">
-          <?php if ($prev_post): ?>
-            <?php
-              $prev_hover_id = $prev_post->ID;
-              $prev_hover_thumb = get_the_post_thumbnail_url($prev_hover_id, 'thumbnail');
+          <a
+            href="<?php echo esc_url(get_permalink($prev_id)); ?>"
+            class="nav-link nav-prev"
+            aria-label="Photo précédente dans la même catégorie"
+            data-thumbnail-hover="<?php echo esc_url($prev_thumb); ?>"
+          >←</a>
 
-              // Cherche une autre photo de la même catégorie
-              if (!empty($current_cat_ids)) {
-                  $related = get_posts([
-                      'post_type' => 'photo',
-                      'posts_per_page' => 1,
-                      'post__not_in' => [$current_post_id],
-                      'tax_query' => [[
-                          'taxonomy' => 'categorie',
-                          'field' => 'term_id',
-                          'terms' => $current_cat_ids
-                      ]]
-                  ]);
-                  if (!empty($related)) {
-                      $prev_hover_thumb = get_the_post_thumbnail_url($related[0]->ID, 'thumbnail');
-                      $prev_hover_id = $related[0]->ID;
-                  }
-              }
-            ?>
-            <a href="<?php echo get_permalink($prev_hover_id); ?>"
-                class="nav-link nav-prev"
-                data-thumbnail-hover="<?php echo esc_url($prev_hover_thumb); ?>"
-                data-thumbnail-default="<?php echo esc_url($main_thumb); ?>"
-                data-hover-id="<?php echo esc_attr($prev_hover_id); ?>">
-              ←
-            </a>
-          <?php endif; ?>
-
-          <?php if ($next_post): ?>
-            <?php
-              $next_hover_id = $next_post->ID;
-              $next_hover_thumb = get_the_post_thumbnail_url($next_hover_id, 'thumbnail');
-
-              if (!empty($current_cat_ids)) {
-                  $related = get_posts([
-                      'post_type' => 'photo',
-                      'posts_per_page' => 1,
-                      'post__not_in' => [$current_post_id],
-                      'tax_query' => [[
-                          'taxonomy' => 'categorie',
-                          'field' => 'term_id',
-                          'terms' => $current_cat_ids
-                      ]]
-                  ]);
-                  if (!empty($related)) {
-                      $next_hover_thumb = get_the_post_thumbnail_url($related[0]->ID, 'thumbnail');
-                      $next_hover_id = $related[0]->ID;
-                  }
-              }
-            ?>
-            <a href="<?php echo get_permalink($next_hover_id); ?>"
-                class="nav-link nav-next"
-                data-thumbnail-hover="<?php echo esc_url($next_hover_thumb); ?>"
-                data-thumbnail-default="<?php echo esc_url($main_thumb); ?>"
-                data-hover-id="<?php echo esc_attr($next_hover_id); ?>">
-              →
-            </a>
-          <?php endif; ?>
+          <a
+            href="<?php echo esc_url(get_permalink($next_id)); ?>"
+            class="nav-link nav-next"
+            aria-label="Photo suivante dans la même catégorie"
+            data-thumbnail-hover="<?php echo esc_url($next_thumb); ?>"
+          >→</a>
         </div>
       </div>
+      <?php endif; ?>
     </div>
   </section>
 
