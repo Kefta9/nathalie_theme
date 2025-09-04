@@ -51,7 +51,7 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
       // IDs de catégories de la photo courante
       $current_cat_ids = ($cats && !is_wp_error($cats)) ? wp_list_pluck($cats, 'term_id') : [];
 
-      // Récupère toutes les photos de la/les même(s) catégorie(s), triées
+      // Récupère toutes les photos de la même catégorie
       $category_posts = [];
       if ( !empty($current_cat_ids) ) {
         $category_posts = get_posts([
@@ -64,11 +64,11 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
             'field'    => 'term_id',
             'terms'    => $current_cat_ids,
           ]],
-          'fields'         => 'ids', // perf : on ne récupère que les IDs
+          'fields'         => 'ids',
         ]);
       }
 
-      // S'assurer que la photo courante est bien présente (sécurité si multiples taxos)
+      // S'assurer que la photo courante est bien présente
       if (!in_array($current_post_id, $category_posts, true)) {
         $category_posts[] = $current_post_id;
       }
@@ -76,7 +76,7 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
       // Trouver l’index de la photo courante dans ce tableau catégorie
       $current_index = array_search($current_post_id, $category_posts, true);
 
-      // Calculer prev/next dans CETTE liste (navigation circulaire)
+      // Calculer prev/next dans CETTE liste
       $count = count($category_posts);
       $show_arrows = ($count > 1);
 
@@ -92,12 +92,12 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
       }
       ?>
 
-      <!-- Navigation flèches (catégorie only) -->
+      <!-- Navigation flèches -->
       <?php if ($show_arrows): ?>
       <div class="single-photo__nav">
         <!-- Miniature -->
         <img src="<?php echo esc_url($main_thumb); ?>" class="nav-preview-single" data-default="<?php echo esc_url($main_thumb); ?>" alt="" />
-        
+
         <div class="nav-arrows">
           <a
             href="<?php echo esc_url(get_permalink($prev_id)); ?>"
