@@ -86,6 +86,10 @@
   max-width: 263px;
 }
 
+.wpcf7-response-output {
+  display: none!important;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .modal-contact-content {

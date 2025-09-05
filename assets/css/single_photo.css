@@ -71,6 +71,11 @@
   align-items: center;
 }
 
+.single-photo__cta p {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+}
+
 .single-photo__cta a {
   display: flex;
   align-items: center;
