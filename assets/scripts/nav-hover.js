@@ -1,8 +1,6 @@
 // Fonctionnement du hover dans la nav
-document.addEventListener("DOMContentLoaded", () => {
-  const preview = document.querySelector(".nav-preview-single");
-  if (!preview) return;
-
+const preview = document.querySelector(".nav-preview-single");
+if (preview) {
   const defaultSrc = preview.getAttribute("data-default") || preview.src;
 
   document.querySelectorAll(".nav-link").forEach((link) => {
@@ -16,4 +14,4 @@ document.addEventListener("DOMContentLoaded", () => {
       preview.src = defaultSrc;
     });
   });
-});
+}
