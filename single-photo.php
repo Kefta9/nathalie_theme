@@ -48,44 +48,33 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
       // ---------- NAVIGATION PAR CATÉGORIE ----------
       $main_thumb = get_the_post_thumbnail_url($current_post_id, 'thumbnail');
 
-      // IDs de catégories de la photo courante
-      $current_cat_ids = ($cats && !is_wp_error($cats)) ? wp_list_pluck($cats, 'term_id') : [];
+      // ID de la première catégorie (si plusieurs, on prend la 1ère)
+      $current_cat_id = ($cats && !is_wp_error($cats)) ? $cats[0]->term_id : null;
 
-      // Récupère toutes les photos de la même catégorie
-      $category_posts = [];
-      if ( !empty($current_cat_ids) ) {
-        $category_posts = get_posts([
-          'post_type'      => 'photo',
-          'posts_per_page' => -1,
-          'orderby'        => 'date',
-          'order'          => 'ASC',
-          'tax_query'      => [[
-            'taxonomy' => 'categorie',
-            'field'    => 'term_id',
-            'terms'    => $current_cat_ids,
-          ]],
-          'fields'         => 'ids',
-        ]);
+      // Récupère tous les posts de la même catégorie
+      $category_posts = get_photos_by_category([$current_cat_id], -1);
+
+      // Transformer en tableau d’IDs
+      $category_ids = wp_list_pluck($category_posts, 'ID');
+
+      // Sécurité : si jamais la photo courante n’est pas dans la liste
+      if (!in_array($current_post_id, $category_ids, true)) {
+        $category_ids[] = $current_post_id;
       }
 
-      // S'assurer que la photo courante est bien présente
-      if (!in_array($current_post_id, $category_posts, true)) {
-        $category_posts[] = $current_post_id;
-      }
+      // Trouver l’index courant
+      $current_index = array_search($current_post_id, $category_ids, true);
 
-      // Trouver l’index de la photo courante dans ce tableau catégorie
-      $current_index = array_search($current_post_id, $category_posts, true);
-
-      // Calculer prev/next dans CETTE liste
-      $count = count($category_posts);
+      // Calculer prev/next avec modulo
+      $count = count($category_ids);
       $show_arrows = ($count > 1);
 
       if ($show_arrows) {
-        $prev_index = ($current_index > 0) ? $current_index - 1 : $count - 1;
-        $next_index = ($current_index < $count - 1) ? $current_index + 1 : 0;
+        $prev_index = ($current_index - 1 + $count) % $count;
+        $next_index = ($current_index + 1) % $count;
 
-        $prev_id = $category_posts[$prev_index];
-        $next_id = $category_posts[$next_index];
+        $prev_id = $category_ids[$prev_index];
+        $next_id = $category_ids[$next_index];
 
         $prev_thumb = get_the_post_thumbnail_url($prev_id, 'thumbnail');
         $next_thumb = get_the_post_thumbnail_url($next_id, 'thumbnail');
@@ -96,22 +85,21 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
       <?php if ($show_arrows): ?>
       <div class="single-photo__nav">
         <!-- Miniature -->
-        <img src="<?php echo esc_url($main_thumb); ?>" class="nav-preview-single" data-default="<?php echo esc_url($main_thumb); ?>" alt="" />
+        <img src="<?php echo esc_url($main_thumb); ?>" 
+             class="nav-preview-single" 
+             data-default="<?php echo esc_url($main_thumb); ?>" 
+             alt="" />
 
         <div class="nav-arrows">
-          <a
-            href="<?php echo esc_url(get_permalink($prev_id)); ?>"
-            class="nav-link nav-prev"
-            aria-label="Photo précédente dans la même catégorie"
-            data-thumbnail-hover="<?php echo esc_url($prev_thumb); ?>"
-          >←</a>
+          <a href="<?php echo esc_url(get_permalink($prev_id)); ?>"
+             class="nav-link nav-prev"
+             aria-label="Photo précédente dans la même catégorie"
+             data-thumbnail-hover="<?php echo esc_url($prev_thumb); ?>">←</a>
 
-          <a
-            href="<?php echo esc_url(get_permalink($next_id)); ?>"
-            class="nav-link nav-next"
-            aria-label="Photo suivante dans la même catégorie"
-            data-thumbnail-hover="<?php echo esc_url($next_thumb); ?>"
-          >→</a>
+          <a href="<?php echo esc_url(get_permalink($next_id)); ?>"
+             class="nav-link nav-next"
+             aria-label="Photo suivante dans la même catégorie"
+             data-thumbnail-hover="<?php echo esc_url($next_thumb); ?>">→</a>
         </div>
       </div>
       <?php endif; ?>
@@ -119,7 +107,9 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
   </section>
 
   <!-- SECTION 2 : Autres photos -->
-  <section class="other-photos"></section>
+  <section class="other-photos">
+
+  </section>
 
 </main>
 <?php
