@@ -5,7 +5,7 @@ const overlay = modal;
 
 // Fonction pour remplir le champ "Réf. photo" dans CF7
 function fillReferenceField(ref) {
-  const refInput = document.querySelector('input[name="your-subject"]');
+  const refInput = document.querySelector('input[name="reference-photo"]');
   if (refInput) {
     refInput.value = ref;
   }
