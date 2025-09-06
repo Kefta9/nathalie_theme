@@ -108,7 +108,22 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 
   <!-- SECTION 2 : Autres photos -->
   <section class="other-photos">
+    <?php
+    // Récupère 2 autres photos de la même catégorie (exclut la photo courante, ordre aléatoire)
+    $other_photos = get_photos_by_category([$current_cat_id], 2, [$current_post_id], true);
 
+    if (!empty($other_photos)) :
+    ?>
+      <div class="other-photos__grid">
+        <?php
+        foreach ($other_photos as $post) :
+          setup_postdata($post);
+          get_template_part('template-parts/photo_block');
+        endforeach;
+        wp_reset_postdata();
+        ?>
+      </div>
+    <?php endif; ?>
   </section>
 
 </main>
