@@ -94,12 +94,16 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
           <a href="<?php echo esc_url(get_permalink($prev_id)); ?>"
              class="nav-link nav-prev"
              aria-label="Photo précédente dans la même catégorie"
-             data-thumbnail-hover="<?php echo esc_url($prev_thumb); ?>">←</a>
+             data-thumbnail-hover="<?php echo esc_url($prev_thumb); ?>">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/left_arrow.svg" alt="Précédent" width="24" height="24" class="arrow-svg" />
+          </a>
 
           <a href="<?php echo esc_url(get_permalink($next_id)); ?>"
              class="nav-link nav-next"
              aria-label="Photo suivante dans la même catégorie"
-             data-thumbnail-hover="<?php echo esc_url($next_thumb); ?>">→</a>
+             data-thumbnail-hover="<?php echo esc_url($next_thumb); ?>">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/right_arrow.svg" alt="Suivant" width="24" height="24" class="arrow-svg" />
+          </a>
         </div>
       </div>
       <?php endif; ?>

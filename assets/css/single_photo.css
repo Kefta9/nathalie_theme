@@ -97,6 +97,12 @@
   object-fit: cover;
 }
 
+.single-photo__nav .arrow-svg {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
 .nav-arrows {
   display: flex;
   justify-content: space-between;
