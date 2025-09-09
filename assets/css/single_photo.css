@@ -85,6 +85,12 @@
   width: 272px;
 }
 
+.single-photo__cta a:hover {
+  background-color: var(--black-color);
+  color: var(--main-color);
+  transition: background-color 0.3s ease;
+}
+
 .single-photo__nav img {
   width: 81px;
   height: 71px;

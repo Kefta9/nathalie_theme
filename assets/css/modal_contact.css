@@ -70,6 +70,12 @@
   height: 50px;
 }
 
+.modal-contact-body input[type="submit"]:hover {
+  background-color: var(--black-color);
+  color: var(--main-color);
+  transition: background-color 0.3s ease;
+}
+
 .modal-contact-body textarea {
   height: 210px;
 }
