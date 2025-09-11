@@ -1,4 +1,5 @@
 /* Styles de la modale de contact */
+
 .modal-contact-overlay {
   position: fixed;
   top: 0;
@@ -96,7 +97,8 @@
   display: none !important;
 }
 
-/* Responsive */
+/* Style pour les écrans plus petits */
+
 @media (max-width: 600px) {
   .modal-contact-content {
     max-width: 95vw;
