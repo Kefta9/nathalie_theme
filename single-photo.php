@@ -112,23 +112,23 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 
   <!-- SECTION 2 : Autres photos -->
   <section class="other-photos">
-  <?php
-  $other_photos = get_photos_by_category([$current_cat_id], 2, [$current_post_id], true);
+    <?php
+    $other_photos = get_photos_by_category([$current_cat_id], 2, [$current_post_id], true);
 
-  if (!empty($other_photos)) :
-  ?>
-    <h2 class="other-photos__title">Vous aimerez aussi</h2>
-    <div class="other-photos__grid">
-      <?php
-      foreach ($other_photos as $post) :
-        setup_postdata($post);
-        get_template_part('template-parts/photo_block');
-      endforeach;
-      wp_reset_postdata();
-      ?>
-    </div>
-  <?php endif; ?>
-</section>
+    if (!empty($other_photos)) :
+    ?>
+      <h2 class="other-photos__title">Vous aimerez aussi</h2>
+      <div class="other-photos__grid">
+        <?php
+        foreach ($other_photos as $post) :
+          setup_postdata($post);
+          get_template_part('template-parts/photo_block');
+        endforeach;
+        wp_reset_postdata();
+        ?>
+      </div>
+    <?php endif; ?>
+  </section>
 
 </main>
 <?php
