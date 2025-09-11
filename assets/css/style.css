@@ -1,26 +1,91 @@
 /* ------------------------------------------------------ Général ------------------------------------------------------ */
 
 * {
-    font-family: 'Space Mono', monospace;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  font-family: "Space Mono", monospace;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
-    --main-color: rgba(255, 255, 255, 1);
-    --CTA-color: rgba(216, 216, 216, 1);
-    --black-color: rgba(0, 0, 0, 1);
-    --red-color: rgba(224, 0, 0, 1);
+  --main-color: rgba(255, 255, 255, 1);
+  --CTA-color: rgba(216, 216, 216, 1);
+  --black-color: rgba(0, 0, 0, 1);
+  --red-color: rgba(224, 0, 0, 1);
 }
 
-a, ul, li {
-    color: inherit; /* Hérite de la couleur du parent */
-    text-decoration: none;
-    list-style: none;    
+a,
+ul,
+li {
+  color: inherit; /* Hérite de la couleur du parent */
+  text-decoration: none;
+  list-style: none;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
+/* Style de la section hero */
+
+.home-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 400px;
+}
+
+.home-hero__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.home-hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-hero__content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.hero__title {
+  text-transform: uppercase;
+  font-size: 96px;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--main-color);
+  font-style: italic;
+}
+
+/* Style pour les écrans plus petits */
+
+@media (max-width: 1280px) {
+  .hero__title {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-hero {
+    height: 30vh;
+  }
+  .hero__title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 320px) {
+  .hero__title {
+    font-size: 22px;
+  }
+}
