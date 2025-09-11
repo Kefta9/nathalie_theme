@@ -42,6 +42,8 @@ html {
 .home-hero {
   position: relative;
   width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
   height: 100vh;
   min-height: 400px;
 }
@@ -67,7 +69,6 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 1rem;
 }
 
 .hero__title {
