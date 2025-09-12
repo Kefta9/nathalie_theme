@@ -5,7 +5,7 @@ get_header();
 <main id="main" class="site-main" role="main">
 	<section class="home-hero">
 			<?php
-			$bg_url = wp_get_attachment_image_url(65, 'full');
+			$bg_url = wp_get_attachment_image_url(65, 'full'); /* Changer ID pour changer l'image (voir url des images) */
 			if ($bg_url) :
 			?>
 				<div class="home-hero__bg">
@@ -52,7 +52,6 @@ get_header();
 		<!-- Affichage des photos -->
 		<div class="other-photos">
 			<?php
-			// Arguments corrigés : tous les posts, pas de variables non définies
 			$other_photos = get_photos_by_category([], 8, [], true);
 
 			if (!empty($other_photos)) :
