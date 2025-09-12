@@ -104,6 +104,8 @@ html {
   cursor: pointer;
   min-width: 260px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 /* Bordure bleue au focus */
