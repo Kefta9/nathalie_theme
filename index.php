@@ -68,6 +68,7 @@ get_header();
 			</div>
 			<?php endif; ?>
 		</div>
+		<button id="load-more" class="load-more-button">Charger plus</button>
 	</section>
 </main>
 

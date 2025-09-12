@@ -128,6 +128,15 @@ html {
   cursor: pointer!important;
 }
 
+/* Style pour le CTA Charger plus */
+
+.load-more-button {
+    display: block;
+    margin: 0 auto 40px auto;
+    padding: 8px 15px;
+    width: 270px;
+}
+
 /* Style pour les écrans plus petits */
 
 @media (max-width: 1280px) {
@@ -152,5 +161,8 @@ html {
   .photo-gallery__filters {
     justify-content: center;
     padding: 20px 20px 0 20px;
+  }
+  .load-more-button {
+    margin-bottom: 20px;
   }
 }
