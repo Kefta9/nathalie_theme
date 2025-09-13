@@ -93,39 +93,83 @@ html {
   padding: 40px 40px 0 40px;
 }
 
-.photo-gallery__filters select {
+.custom-select {
+  position: relative;
+}
+
+.custom-select__label {
+  width: 260px;
+  padding: 11px 18px;
+  background: var(--main-color);
   border: 1.3px solid var(--CTA-color);
   border-radius: 8px;
-  padding: 11px 18px;
-  font-family: "Poppins", sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  text-transform: uppercase;
+  text-align: left;
   cursor: pointer;
-  min-width: 260px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Bordure bleue au focus */
-.photo-gallery__filters select:focus {
-  outline: none;
-  border-color: rgba(33, 90, 255, 1);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-/* Option par défaut */
-.photo-gallery__filters option {
-  padding: 12px;
-  font-family: "Poppins", sans-serif;
-  font-size: 12px;
-  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   text-transform: uppercase;
 }
 
-.photo-gallery__filters option:hover {
-  background-color: var(--red-color) !important;
-  cursor: pointer !important;
+.custom-select__label:focus {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.custom-select__label:after {
+  content: "";
+  display: inline-block;
+  border: solid var(--black-color);
+  border-width: 0 2px 2px 0; /* Flèche */
+  padding: 4px;
+  transform: rotate(45deg);
+  transition: 0.2s;
+}
+
+.custom-select.open .custom-select__label:after {
+  transform: rotate(-135deg);
+}
+
+.custom-select__options {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: var(--main-color);
+  border: 1.5px solid #bfc8d6;
+  border-radius: 0 0 7px 7px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  max-height: 220px;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.custom-select.open .custom-select__options {
+  opacity: 1;
+  pointer-events: auto;
+}
+.custom-select__options li {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+.custom-select__options li:hover {
+  background: rgba(255, 214, 214, 1);
+  color: var(--black-color);
+}
+
+.custom-select__options li.selected {
+  background: var(--red-color);
+  color: var(--main-color);
+}
+.custom-select__options li:not(:last-child) {
+  border-bottom: 1px solid var(--CTA-color);
+}
+.custom-select__label.selected {
+  font-weight: 500;
 }
 
 /* Style pour le CTA Charger plus */
@@ -174,5 +218,12 @@ html {
   }
   .load-more-button {
     margin-bottom: 20px;
+  }
+  .photo-gallery__filters {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .custom-select {
+    width: 100%;
   }
 }

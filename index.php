@@ -23,30 +23,40 @@ get_header();
 
 		<!-- Filtres -->
 		<form method="get" class="photo-gallery__filters">
-			<select name="categorie">
-				<option value="">Catégorie</option>
-				<?php
-				$categories = get_terms(['taxonomy' => 'categorie', 'hide_empty' => false]);
-				foreach ($categories as $cat) {
-					echo '<option value="' . esc_attr($cat->slug) . '">' . esc_html($cat->name) . '</option>';
-				}
-				?>
-			</select>
+			<div class="custom-select" data-filter="categorie">
+				<button type="button" class="custom-select__label" data-default="Catégorie">Catégorie</button>
+				<ul class="custom-select__options">
+					<?php
+					$categories = get_terms(['taxonomy' => 'categorie', 'hide_empty' => false]);
+					foreach ($categories as $cat) {
+						echo '<li data-value="' . esc_attr($cat->slug) . '">' . esc_html($cat->name) . '</li>';
+					}
+					?>
+				</ul>
+				<input type="hidden" name="categorie" value="">
+			</div>
 
-			<select name="format">
-				<option value="">Format</option>
-				<?php
-				$formats = get_terms(['taxonomy' => 'format', 'hide_empty' => false]);
-				foreach ($formats as $format) {
-					echo '<option value="' . esc_attr($format->slug) . '">' . esc_html($format->name) . '</option>';
-				}
-				?>
-			</select>
+			<div class="custom-select" data-filter="format">
+				<button type="button" class="custom-select__label" data-default="Format">Format</button>
+				<ul class="custom-select__options">
+					<?php
+					$formats = get_terms(['taxonomy' => 'format', 'hide_empty' => false]);
+					foreach ($formats as $format) {
+						echo '<li data-value="' . esc_attr($format->slug) . '">' . esc_html($format->name) . '</li>';
+					}
+					?>
+				</ul>
+				<input type="hidden" name="format" value="">
+			</div>
 
-			<select name="order">
-				<option value="DESC">Les plus récentes</option>
-				<option value="ASC">Les plus anciennes</option>
-			</select>
+			<div class="custom-select" data-filter="order">
+				<button type="button" class="custom-select__label">Trier</button>
+				<ul class="custom-select__options">
+					<li data-value="DESC">Les plus récentes</li>
+					<li data-value="ASC">Les plus anciennes</li>
+				</ul>
+				<input type="hidden" name="order" value="DESC">
+			</div>
 		</form>
 
 		<!-- Affichage des photos -->
