@@ -14,6 +14,7 @@
 
 .photo-block {
   flex: 1 1 calc(50% - 20px);
+  max-width: 50%;
 }
 
 .photo-block__img {
@@ -28,6 +29,7 @@
 @media (max-width: 767px) {
   .photo-block {
     flex: 1 1 100%;
+    max-width: none;
   }
   .photo-block__img {
     height: 280px;

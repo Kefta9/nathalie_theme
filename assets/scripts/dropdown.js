@@ -1,47 +1,25 @@
-// Dropdown
-
-document.querySelectorAll(".custom-select").forEach(function (select) {
-  const label = select.querySelector(".custom-select__label");
-  const options = select.querySelector(".custom-select__options");
-  const hiddenInput = select.querySelector('input[type="hidden"]');
-  let currentValue = hiddenInput.value;
-
-  // Ouvre/ferme la liste
-  label.addEventListener("click", function (e) {
-    e.stopPropagation();
-    document
-      .querySelectorAll(".custom-select.open")
-      .forEach(function (openSelect) {
-        if (openSelect !== select) openSelect.classList.remove("open");
-      });
-    select.classList.toggle("open");
-  });
-
-  // Sélection d'une option
-  options.querySelectorAll("li").forEach(function (li) {
-    li.addEventListener("click", function (e) {
-      e.stopPropagation();
-      options.querySelectorAll("li").forEach(function (el) {
-        el.classList.remove("selected");
-      });
-      li.classList.add("selected");
-      label.textContent = li.textContent;
-      label.classList.add("selected");
-      hiddenInput.value = li.getAttribute("data-value");
-      select.classList.remove("open");
-    });
-    // Marquer l'option sélectionnée au chargement
-    if (li.getAttribute("data-value") === currentValue) {
-      li.classList.add("selected");
-      label.textContent = li.textContent;
-      label.classList.add("selected");
-    }
-  });
-});
-
-// Fermer si clic en dehors
-document.addEventListener("click", function () {
-  document.querySelectorAll(".custom-select.open").forEach(function (select) {
-    select.classList.remove("open");
-  });
+// délégation : un seul handler pour tous les clicks
+document.addEventListener('click', (e) => {
+  const li = e.target.closest('.custom-select__options li');
+  if (li) {
+    const select = li.closest('.custom-select');
+    const hidden = select.querySelector('input[type="hidden"]');
+    const label = select.querySelector('.custom-select__label');
+    select.querySelectorAll('li').forEach(el => el.classList.remove('selected'));
+    li.classList.add('selected');
+    hidden.value = li.dataset.value;
+    label.textContent = li.textContent;
+    select.classList.remove('open');
+    return;
+  }
+  // ouvrir/fermer labels
+  const label = e.target.closest('.custom-select__label');
+  if (label) {
+    const select = label.closest('.custom-select');
+    document.querySelectorAll('.custom-select.open').forEach(s => { if (s !== select) s.classList.remove('open');});
+    select.classList.toggle('open');
+    return;
+  }
+  // clic en dehors -> fermer tout
+  document.querySelectorAll('.custom-select.open').forEach(s => s.classList.remove('open'));
 });

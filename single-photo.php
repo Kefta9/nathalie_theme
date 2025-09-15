@@ -31,7 +31,7 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 
       <!-- Col droite -->
       <div class="single-photo__media">
-        <?php the_post_thumbnail('large', ['class' => 'single-photo__img', 'loading' => 'lazy']); ?>
+        <?php the_post_thumbnail('medium', ['class' => 'single-photo__img', 'loading' => 'lazy']); ?>
       </div>
 
     </div>
