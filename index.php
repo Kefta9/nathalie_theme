@@ -61,22 +61,20 @@ get_header();
 
 		<!-- Affichage des photos -->
 		<div class="other-photos">
-			<?php
-			$other_photos = get_photos_by_category([], 8, [], true);
-
-			if (!empty($other_photos)) :
-			?>
 			<div class="other-photos__grid">
 				<?php
-				foreach ($other_photos as $post) :
-					setup_postdata($post);
-					get_template_part('template-parts/photo_block');
-				endforeach;
-				wp_reset_postdata();
+				$other_photos = get_photos_by_category([], 8, [], true);
+				if (!empty($other_photos)) :
+					foreach ($other_photos as $post) :
+						setup_postdata($post);
+						get_template_part('template-parts/photo_block');
+					endforeach;
+					wp_reset_postdata();
+				endif;
 				?>
 			</div>
-			<?php endif; ?>
 		</div>
+
 		<button id="load-more" class="load-more-button">Charger plus</button>
 	</section>
 </main>
