@@ -114,4 +114,8 @@
   .hamburger {
     display: flex;
   }
+  body.admin-bar .nav-menu {
+    top: 126px; /* 80px + 46px (barre admin mobile) */
+    height: calc(100vh - 126px);
+  }
 }
