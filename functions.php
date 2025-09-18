@@ -71,7 +71,7 @@ function load_more_photos_callback() {
 
     $paged     = intval($_POST['page']) ?: 1;
     $per_page  = 8;
-    $categorie = sanitize_text_field($_POST['categorie']); // sécurité pour nettoyer les données
+    $categorie = sanitize_text_field($_POST['categorie']); // sécurité pour nettoyer les données reçues par le choix de l'utilisateur
     $format    = sanitize_text_field($_POST['format']);
     $order     = sanitize_text_field($_POST['order']);
     $random    = empty($categorie) && empty($format) && empty($order);
@@ -120,7 +120,7 @@ function load_more_photos_callback() {
         endwhile;
         wp_reset_postdata();
         $content = ob_get_clean();
-        wp_send_json_success($content);
+        wp_send_json_success($content); // Renvoie le HTML généré
     else :
         wp_send_json_error('no_more');
     endif;

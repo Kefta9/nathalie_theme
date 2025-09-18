@@ -1,4 +1,4 @@
-// délégation : un seul handler pour tous les clicks
+// délégation : un seul handler pour tous les cliques
 document.addEventListener("click", (e) => {
   const li = e.target.closest(".custom-select__options li");
   if (li) {
@@ -10,7 +10,7 @@ document.addEventListener("click", (e) => {
       .forEach((el) => el.classList.remove("selected"));
     li.classList.add("selected");
     hidden.value = li.dataset.value;
-    hidden.dispatchEvent(new Event("change")); // Previent le filters.js qui executera loadPhotos(true);
+    hidden.dispatchEvent(new Event("change")); // Previent le filters.js qui executera loadPhotos;
     label.textContent = li.textContent;
     select.classList.remove("open");
     return;

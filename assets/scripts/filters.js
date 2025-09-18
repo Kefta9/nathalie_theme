@@ -9,8 +9,8 @@ function loadPhotos(reset = false) { // reset = true remplace le contenu, false 
   fetch(nathalie_ajax.ajax_url, { // défini dans wp_localize_script
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ // 
-      action: "load_more_photos", //
+    body: new URLSearchParams({ 
+      action: "load_more_photos", // action à exécuter
       nonce: nathalie_ajax.nonce,
       page: currentPage,
       categorie: categorie,
@@ -45,7 +45,7 @@ document
   .forEach((input) => {
     input.addEventListener("change", () => {
       currentPage = 1;
-      loadPhotos(true); // recharge avec reset
+      loadPhotos(true); // recharge avec reset car changement de filtre
       document.getElementById("load-more").style.display = "block";
     });
 });
