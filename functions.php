@@ -15,6 +15,7 @@ function nathalie_theme_enqueue_assets() {
     wp_enqueue_style('nathalie-theme-single-photo', get_template_directory_uri() . '/assets/css/single_photo.css');
     wp_enqueue_style('nathalie-theme-photo-block', get_template_directory_uri() . '/assets/css/photo_block.css');
     wp_enqueue_style('nathalie-theme-page', get_template_directory_uri() . '/assets/css/page.css');
+    wp_enqueue_style('nathalie-theme-lightbox', get_template_directory_uri() . '/assets/css/lightbox.css');
 
     // Scripts
     wp_enqueue_script('nathalie-theme-global', get_template_directory_uri() . '/assets/scripts/global.js', array(), null, true);
@@ -22,6 +23,7 @@ function nathalie_theme_enqueue_assets() {
     wp_enqueue_script('nathalie-theme-modal', get_template_directory_uri() . '/assets/scripts/modal.js', array(), null, true);
     wp_enqueue_script('nathalie-theme-nav-hover', get_template_directory_uri() . '/assets/scripts/nav-hover.js', array(), null, true);
     wp_enqueue_script('nathalie-theme-dropdown', get_template_directory_uri() . '/assets/scripts/dropdown.js', array(), null, true);
+    wp_enqueue_script('nathalie-theme-lightbox', get_template_directory_uri() . '/assets/scripts/lightbox.js', array(), null, true);
 
     // Script AJAX
     wp_enqueue_script('nathalie-theme-filters', get_template_directory_uri() . '/assets/scripts/filters.js', array(), null, true);
