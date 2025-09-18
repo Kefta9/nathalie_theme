@@ -14,6 +14,7 @@ function nathalie_theme_enqueue_assets() {
     wp_enqueue_style('nathalie-theme-modal-contact', get_template_directory_uri() . '/assets/css/modal_contact.css');
     wp_enqueue_style('nathalie-theme-single-photo', get_template_directory_uri() . '/assets/css/single_photo.css');
     wp_enqueue_style('nathalie-theme-photo-block', get_template_directory_uri() . '/assets/css/photo_block.css');
+    wp_enqueue_style('nathalie-theme-page', get_template_directory_uri() . '/assets/css/page.css');
 
     // Scripts
     wp_enqueue_script('nathalie-theme-global', get_template_directory_uri() . '/assets/scripts/global.js', array(), null, true);
