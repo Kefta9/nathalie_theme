@@ -28,9 +28,15 @@ function nathalie_theme_enqueue_assets() {
     // Script AJAX
     wp_enqueue_script('nathalie-theme-filters', get_template_directory_uri() . '/assets/scripts/filters.js', array(), null, true);
 
+    // Localize script pour AJAX et variables globales
     wp_localize_script('nathalie-theme-filters', 'nathalie_ajax', array(
         'ajax_url' => admin_url('admin-ajax.php'),
         'nonce'    => wp_create_nonce('nathalie_ajax_nonce'),
+    ));
+
+    // Localize script pour la lightbox
+    wp_localize_script('nathalie-theme-lightbox', 'nathalie_theme', array(
+        'templateUrl' => get_template_directory_uri()
     ));
 }
 add_action('wp_enqueue_scripts', 'nathalie_theme_enqueue_assets');
@@ -68,7 +74,6 @@ function get_photos_by_category($category_ids = [], $limit = -1, $exclude = [], 
 }
 
 // AJAX : Charger plus / Filtres
-
 function load_more_photos_callback() {
     check_ajax_referer('nathalie_ajax_nonce', 'nonce');
 
