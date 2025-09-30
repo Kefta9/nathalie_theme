@@ -3,7 +3,7 @@ $categories = get_the_terms(get_the_ID(), 'categorie'); // Catégories des photo
 $category_name = !empty($categories) ? $categories[0]->name : '';
 $full_image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
 ?>
-<article class="photo-block" data-category="<?php echo esc_attr($category_name); ?>" data-full-image="<?php echo esc_url($full_image_url); ?>">
+<article class="photo-block" data-photo-id="<?php echo get_the_ID(); ?>" data-category="<?php echo esc_attr($category_name); ?>" data-full-image="<?php echo esc_url($full_image_url); ?>">
     <?php if (has_post_thumbnail()): ?>
       <?php the_post_thumbnail('medium', ['class' => 'photo-block__img', 'loading' => 'lazy']); ?>
       <div class="photo-block__overlay">

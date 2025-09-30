@@ -16,7 +16,7 @@
     <header class="site-header">
         <nav class="navbar-container">
             <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Logo Nathalie Mota">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Logo.png" alt="Logo Nathalie Mota">
             </a>
             <div class="nav-menu">
                 <?php

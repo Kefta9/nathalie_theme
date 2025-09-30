@@ -77,27 +77,27 @@ function get_photos_by_category($category_ids = [], $limit = -1, $exclude = [], 
 function load_more_photos_callback() {
     check_ajax_referer('nathalie_ajax_nonce', 'nonce');
 
-    $paged     = intval($_POST['page']) ?: 1;
     $per_page  = 8;
-    $categorie = sanitize_text_field($_POST['categorie']); // sécurité pour nettoyer les données reçues par le choix de l'utilisateur
+    $categorie = sanitize_text_field($_POST['categorie']);
     $format    = sanitize_text_field($_POST['format']);
     $order     = sanitize_text_field($_POST['order']);
-    $random    = empty($categorie) && empty($format) && empty($order);
+    
+    // Récupérer les IDs à exclure (photos déjà affichées)
+    $exclude = [];
+    if (!empty($_POST['exclude'])) {
+        $exclude_string = sanitize_text_field($_POST['exclude']);
+        $exclude = array_filter(array_map('intval', explode(',', $exclude_string)));
+    }
 
     $args = array(
         'post_type'      => 'photo',
         'posts_per_page' => $per_page,
-        'paged'          => $paged,
+        'orderby'        => 'date',
+        'order'          => $order ?: 'DESC',
+        'post__not_in'   => $exclude,
     );
 
-    if ($random) {
-        $args['orderby'] = 'rand';
-    } else {
-        $args['orderby'] = 'date';
-        $args['order']   = $order ?: 'DESC';
-    }
-
-    $tax_query = array('relation' => 'AND'); 
+    $tax_query = array('relation' => 'AND');
 
     if (!empty($categorie)) {
         $tax_query[] = array(
@@ -115,7 +115,7 @@ function load_more_photos_callback() {
         );
     }
 
-    if (count($tax_query) > 1) { // Si au moins un filtre alors on affiche les photos correspondantes (relation AND)
+    if (count($tax_query) > 1) {
         $args['tax_query'] = $tax_query;
     }
 
@@ -128,12 +128,12 @@ function load_more_photos_callback() {
         endwhile;
         wp_reset_postdata();
         $content = ob_get_clean();
-        wp_send_json_success($content); // Renvoie le HTML généré
+        wp_send_json_success($content);
     else :
-        wp_send_json_error('no_more');
+        wp_send_json_success('no_more');
     endif;
 
     wp_die();
 }
-add_action('wp_ajax_load_more_photos', 'load_more_photos_callback'); // appel ajax avec action=load_more_photos déclenche load_more_photos_callback()
+add_action('wp_ajax_load_more_photos', 'load_more_photos_callback');
 add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos_callback');
