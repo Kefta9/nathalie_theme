@@ -44,11 +44,11 @@ function updatePhotos() { // Récupère toutes les photos actuelles
 }
 
 // Afficher une photo dans la lightbox
-function showLightbox(index) {
+function showLightbox(index) { // index cliqué par l'utilisateur
   if (index < 0 || index >= photos.length) return;
   currentPhotoIndex = index;
 
-  const photo = photos[index];
+  const photo = photos[index]; // On mémorise la photo courante cliquée dans le tableau photos
   lightbox.querySelector('.lightbox__img').src = photo.image;
   lightbox.querySelector('.lightbox__img').alt = photo.title;
   lightbox.querySelector('.lightbox__ref').textContent = photo.ref;
